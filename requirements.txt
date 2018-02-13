@@ -3,4 +3,5 @@ Pillow==5.0.0
 pkg-resources==0.0.0
 pytz==2018.3
 qrcode==5.3
+reportlab==3.4.0
 six==1.11.0
