@@ -7,11 +7,12 @@ class Event(models.Model):
 	description = models.TextField()
 	price = models.IntegerField()
 	organized_by = models.CharField(max_length=1000)
-	date = models.DateTimeField()
+	date = models.CharField(max_length=10)
+	time = models.CharField(max_length=10)
 	picture = models.ImageField()
 	location = models.TextField()
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
-		return name
+		return self.name

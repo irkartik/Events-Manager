@@ -8,27 +8,27 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method='post' action="{% url 'create_event' %}" enctype="multipart/form-data">{% csrf_token %}
+            <form role="form" method='post' action="{% url 'update_event' event.id %}" enctype="multipart/form-data">{% csrf_token %}
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Event Name" name="name">
+                  <input type="text" class="form-control" id="name" placeholder="Event Name" name="name" value={{event.name}}>
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea type="text" class="form-control" id="description" placeholder="Description" name="description"></textarea>
+                  <textarea type="text" class="form-control" id="description" placeholder="Description" name="description">{{event.description}}</textarea>
                 </div>
                 <div class="form-group">
                   <label for="price">Ticket Price</label>
-                  <input type="number" class="form-control" id="price" placeholder="Ticket Price" name="price">
+                  <input type="number" class="form-control" id="price" placeholder="Ticket Price" name="price" value="{{event.price}}">
                 </div>
                 <div class="form-group">
                   <label for="organized_by">Organizer</label>
-                  <input type="text" class="form-control" id="organized_by" placeholder="Event Organizer" name="organizer">
+                  <input type="text" class="form-control" id="organized_by" placeholder="Event Organizer" name="organizer" value="{{event.organized_by}}">
                 </div>
                 <div class="form-group">
                   <label for="time">Time Of Event</label>
-                  <input type="text" class="form-control" id="time" placeholder="10:30 AM" name="time">
+                  <input type="text" class="form-control" id="time" placeholder="10:30 AM" name="time" value="{{event.time}}">
                 </div>
                 <div class="form-group">
                 <label>Date of Event</label>
@@ -37,14 +37,14 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name ="date" placeholder="dd/mm/yyyy">
+                  <input type="text" class="form-control pull-right" id="datepicker" name ="date" placeholder="dd/mm/yyyy" value="{{event.date}}">
                 </div>
                 <!-- /.input group -->
               </div>
              
               <div class="form-group">
                   <label for="location">Location</label>
-                  <textarea type="text" class="form-control" id="location" placeholder="Enter Location" name="location"></textarea>
+                  <textarea type="text" class="form-control" id="location" placeholder="Enter Location" name="location">{{event.location}}</textarea>
                 </div>
               <!-- /.box-body -->
                 <div class="form-group">
