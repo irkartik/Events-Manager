@@ -5,6 +5,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Event
+from . import mybarcode
+import random
 
 # Create your views here.
 
@@ -47,6 +49,13 @@ def create(request):
 		location = request.POST.get("location")
 
 		temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
+		barcode_file_name = 'barcode_event_' + str(temp.id)
+		unique_code = random.randint(9000000,100000000)
+		barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
+		barcode = barcode.replace('media/', "")
+		temp.barcode = barcode
+		temp.unique_code = unique_code
+		temp.save()
 
 		return redirect('dashboard')
 	else:
@@ -76,7 +85,7 @@ def update_event(request, event_id):
 
 		if image is not None:
 			temp.picture = image
-			
+
 		temp.name = name 
 		temp.description = description 
 		temp.price = price 
@@ -92,3 +101,21 @@ def update_event(request, event_id):
 			'event': Event.objects.get(id=event_id),
 		}
 		return render(request, 'core/event_update.html', context)
+
+@login_required(login_url="/login/")
+def send_email(request, event_id):
+	subject = "Invitation for Event"
+	to = ['raazu889@gmail.com']
+	from_email = 'raazu889@gmail.com'
+
+	ctx = {
+		'user': 'buddy',
+		'purchase': 'Books'
+	}
+
+	message = get_template('main/email/email.html').render(Context(ctx))
+	msg = EmailMessage(subject, message, to=to, from_email=from_email)
+	msg.content_subtype = 'html'
+	msg.send()
+
+	return HttpResponse('email_two')

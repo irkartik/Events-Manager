@@ -4,6 +4,8 @@ from datetime import datetime
 # Create your models here.
 class Event(models.Model):
 	name = models.CharField(max_length=1000)
+	unique_code = models.IntegerField(blank=True, null=True)
+	barcode = models.ImageField(blank=True, null=True)
 	description = models.TextField()
 	price = models.IntegerField()
 	organized_by = models.CharField(max_length=1000)
