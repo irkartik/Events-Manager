@@ -4,11 +4,23 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import Event
+from .models import Event, User
+from datetime import datetime
 from . import mybarcode
 import random
+from django.contrib import messages
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # Create your views here.
+
+def homeview(request):
+	if not request.user.is_authenticated:
+		return redirect('login_user')
+	else:
+		return redirect('dashboard')
 
 def login_user(request):
 	if request.method == 'POST':
@@ -22,7 +34,10 @@ def login_user(request):
 			return redirect('user_login')
 	else:
 		context = {}
-		return render(request, 'core/login_form.html', context)	
+		if request.user.is_authenticated:
+			return redirect('dashboard')
+		else:
+			return render(request, 'core/login_form.html', context)	
 
 @login_required(login_url='/login/')
 def logout_user(request):
@@ -99,23 +114,62 @@ def update_event(request, event_id):
 	else:
 		context = {
 			'event': Event.objects.get(id=event_id),
+			'datetime': datetime.now().date,
 		}
 		return render(request, 'core/event_update.html', context)
 
 @login_required(login_url="/login/")
 def send_email(request, event_id):
-	subject = "Invitation for Event"
-	to = ['raazu889@gmail.com']
-	from_email = 'raazu889@gmail.com'
 
-	ctx = {
-		'user': 'buddy',
-		'purchase': 'Books'
+	context = {
+		'event': Event.objects.get(id=event_id),
+		'datetime': datetime.now().date,
 	}
 
-	message = get_template('main/email/email.html').render(Context(ctx))
-	msg = EmailMessage(subject, message, to=to, from_email=from_email)
-	msg.content_subtype = 'html'
+	subject = "Invitation for " + Event.objects.get(id=event_id).name
+	to = list()
+	for user in User.objects.all():
+		to.append(user.email)
+
+	print(to)
+	from_email = 'raazu889@gmail.com'
+
+	html_content = render_to_string('core/email.html', context) # render with dynamic value
+	text_content = strip_tags(html_content) # Strip the html tag. So people can see the pure text at least.
+
+	# create the email, and attach the HTML version as well.
+	msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+	msg.attach_alternative(html_content, "text/html")
 	msg.send()
 
-	return HttpResponse('email_two')
+	return render(request, 'core/email.html', context)
+
+@login_required(login_url="/login/")
+def user_add(request):
+	if request.method=="POST":
+		name = request.POST.get('name') 
+		email = request.POST.get('email')
+		phone = request.POST.get('phone')
+
+		temp = User.objects.create(name=name, email=email, phone=phone)
+		temp.save
+		messages.add_message(request, messages.INFO, "Successfully Added User")
+		return redirect('show_users')
+	else:
+		context = {}
+		return render(request, 'core/user_add.html', context)
+
+@login_required(login_url="/login/")
+def show_users(request):
+	context = {
+		'users' : User.objects.all(),
+	}
+	return render(request, 'core/user_show.html', context)
+
+@login_required(login_url="/login/")
+def user_delete(request, user_id):
+	temp = User.objects.get(id=user_id)
+	temp.delete()
+	messages.add_message(request, messages.INFO, "Successfully Deleted User")
+	return redirect('show_users')
+

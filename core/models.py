@@ -18,3 +18,12 @@ class Event(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class User(models.Model):
+	name = models.CharField(max_length=1000)
+	email = models.EmailField()
+	phone = models.IntegerField(null=True, blank=True)
+	created_date = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return self.name

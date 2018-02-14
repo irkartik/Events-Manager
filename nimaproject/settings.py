@@ -25,7 +25,7 @@ SECRET_KEY = '#a#y8c*gw2v6w9)zh^fr#p+^z@x^=xe%d!3!y0**jx%26lb%)0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -113,6 +113,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+SERVER_EMAIL = <server_email_ID>
+EMAIL_USE_TLS = True
+EMAIL_HOST = <email_host>
+EMAIL_HOST_USER = <server_email_ID>
+EMAIL_HOST_PASSWORD = <Email_Password>
+EMAIL_PORT = <Port Number>
+
+
 
 
 # Static files (CSS, JavaScript, Images)

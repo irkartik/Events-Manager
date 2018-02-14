@@ -15,7 +15,7 @@
                           </button></a>
                           <a href="{% url 'delete_event' event.id %}"><button type="button" class="btn bg-black btn-sm"><i class="fa fa-trash"></i>
                           </button></a>
-                          <a href="#"><button type="button" class="btn bg-black btn-sm"><i class="fa fa-share"></i>
+                          <a href="{% url 'send_email' event.id %}"><button type="button" class="btn bg-black btn-sm"><i class="fa fa-share"></i>
                           </button></a>
                         </div>
                       </div>
