@@ -31,7 +31,7 @@ def login_user(request):
 			login(request, user)
 			return redirect('dashboard')
 		else:
-			return redirect('user_login')
+			return redirect('login_user')
 	else:
 		context = {}
 		if request.user.is_authenticated:
@@ -42,7 +42,7 @@ def login_user(request):
 @login_required(login_url='/login/')
 def logout_user(request):
 	logout(request)
-	return redirect('login')
+	return redirect('login_user')
 
 @login_required(login_url='/login/')
 def dashboard(request):

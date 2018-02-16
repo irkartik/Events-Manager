@@ -1,2 +1,3 @@
 media/
-*/__pycache__/*
+core/__pycache__/*.pyc
+nimaproject/__pycache__/*.pyc

@@ -115,12 +115,12 @@ USE_L10N = True
 USE_TZ = True
 
 
-SERVER_EMAIL = <server_email_ID>
+SERVER_EMAIL = 'raazu889@gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST = <email_host>
-EMAIL_HOST_USER = <server_email_ID>
-EMAIL_HOST_PASSWORD = <Email_Password>
-EMAIL_PORT = <Port Number>
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'raazu889@gmail.com'
+EMAIL_HOST_PASSWORD = 'Mathematics@889'
+EMAIL_PORT = 587
 
 
 
