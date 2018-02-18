@@ -18,9 +18,23 @@ from django.urls import path, include
 from . import settings
 from django.conf.urls.static import static
 
+from rest_framework import routers
+from core import views as coreviews
+from userdata import views as userdataviews
+
+router = routers.DefaultRouter()
+router.register(r'api/users', coreviews.UserViewSet)
+router.register(r'api/events', coreviews.EventViewSet)
+router.register(r'api/appointments', userdataviews.AppointmentViewSet)
+router.register(r'api/eligibility', userdataviews.EligibilityViewSet)
+router.register(r'api/appliedusers', userdataviews.AppliedUserViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('', include('userdata.urls')),
+    path('', include(router.urls)),
+    path('api-auth', include('rest_framework.urls'), name='rest_framework')
 ]
 
 if settings.DEBUG:

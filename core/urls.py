@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+
+
+
 urlpatterns = [
     path('', views.homeview, name='home'),
     path('login/', views.login_user, name="login_user"),
@@ -16,4 +19,9 @@ urlpatterns = [
     path('create_user', views.user_add, name="user_add"),
     path('<int:user_id>/delete_user', views.user_delete, name="user_delete"),
     #path('<int:user_id>/update_user', views.user_update, name="update_user"),
+
+
+
+
+
 ]

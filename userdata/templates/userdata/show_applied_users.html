@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Applied Users</h3>
+			{% if messages %}
+			    <ul class="messages">
+			        {% for message in messages %}
+			            <p>{{ message }}</p>
+			        {% endfor %}
+			    </ul>
+			{% endif %}
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>title</th>
+                    <th>first_name</th>
+                    <th>middle_name</th>
+                    <th>last_name</th>
+                    <th>year</th>
+                    <th>intake</th>
+                    <th>course</th>
+                    <th>permanent_country</th>
+                    <th>date_of_birth</th>
+                    <th>place_of_birth</th>
+                    <th>sex</th>
+                    <th>nationality</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  	{% if appliedusers %}
+	                  	{% for data in appliedusers %}
+	                  		<tr>
+                          <td>{{ data.title }}</td>
+                          <td>{{ data.first_name }}</td>
+                          <td>{{ data.middle_name }}</td>
+                          <td>{{ data.last_name }}</td>
+                          <td>{{ data.year }}</td>
+                          <td>{{ data.intake }}</td>
+                          <td>{{ data.course }}</td>
+                          <td>{{ data.permanent_country }}</td>
+                          <td>{{ data.date_of_birth }}</td>
+                          <td>{{ data.place_of_birth }}</td>
+                          <td>{{ data.sex }}</td>
+                          <td>{{ data.nationality }}</td>
+                          <td><a href="{% url 'show_full_profile' data.id %}">Full Profile</a></td>
+								        </tr>
+	                  	{% endfor %}
+	                {% else %}
+						<td>No Data</td>
+					{% endif %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- <div class="box-footer clearfix">
+              <a href="{% url 'user_add' %}" class="btn btn-sm btn-info btn-flat pull-left">Add New User</a>
+            </div> -->
+            <!-- /.box-footer -->
+          </div>
+{% endblock %}

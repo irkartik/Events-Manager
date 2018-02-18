@@ -111,11 +111,17 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MENU</li>
+        <li class="header">EVENT</li>
         <!-- Optionally, you can add icons to the links -->
         <li {% if request.path == "/language/" %}class="active"{% endif %}><a href="{% url 'dashboard' %}"><i class="fa fa-bookmark-o"></i> <span>Show Events</span></a></li>
         <li {% if request.path == "/genre/" %}class="active"{% endif %}><a href="{% url 'create_event' %}"><i class="fa fa-plus"></i> <span>Create Event</span></a></li>
         <li {% if request.path == "/users/" %}class="active"{% endif %}><a href="{% url 'show_users' %}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+        <li class="header">APPOINTMENTS</li>
+        <li {% if request.path == "/users/" %}class="active"{% endif %}><a href="{% url 'show_appointments' %}"><i class="fa fa-users"></i> <span>Appointments</span></a></li>
+        <li class="header">ELIGIBILITY</li>
+        <li {% if request.path == "/users/" %}class="active"{% endif %}><a href="{% url 'show_eligibility' %}"><i class="fa fa-users"></i> <span>Eligibility Check</span></a></li>
+        <li class="header">APPLIED USERS</li>
+        <li {% if request.path == "/users/" %}class="active"{% endif %}><a href="{% url 'show_applied_users' %}"><i class="fa fa-users"></i> <span>Applied Users</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -1,0 +1,112 @@
+{% extends 'core/base_naked.html' %}
+
+{% load static %}
+{% block content %}
+  <div class="row">
+    <div class="container">
+	<div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Check Eligibility</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" method='post' action="{% url 'check-eligibility' %}" enctype="multipart/form-data">{% csrf_token %}
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Full Name" name="name">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email ID" name="email">
+                </div>
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <textarea type="text" class="form-control" id="address" placeholder="Address" name="address"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="number" class="form-control" id="phone" placeholder="Telephone Number" name="phone">
+                </div> 
+                
+                <div class="form-group">
+                  <label>Qualification</label>
+                  <select name="qualification" class="form-control">
+                    <option value="SEE | SLC | O level">SEE | SLC | O level</option>
+                    <option value="+2 | A Level">+2 | A Level</option>
+                    <option value="Bachelor Degree">Bachelor Degree</option>
+                    <option value="Masters Degree">Masters Degree</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="ielts">IELTS Score</label>
+                  <input type="number" class="form-control" id="ielts" placeholder="TOEFL Score" name="ielts">
+                </div> 
+
+                <div class="form-group">
+                  <label for="toefl">TOEFL Score</label>
+                  <input type="number" class="form-control" id="toefl" placeholder="TOEFL Score" name="toefl">
+                </div> 
+
+                <div class="form-group">
+                  <label for="sat">SAT Score</label>
+                  <input type="number" class="form-control" id="sat" placeholder="SAT Score" name="sat">
+                </div> 
+
+                <div class="form-group">
+                  <label for="gre">GRE Score</label>
+                  <input type="number" class="form-control" id="gre" placeholder="GRE Score" name="gre">
+                </div> 
+
+                <div class="form-group">
+                  <label for="gmat">GMAR Score</label>
+                  <input type="number" class="form-control" id="gmat" placeholder="GMAT Score" name="gmat">
+                </div> 
+
+                <div class="form-group">
+                  <label for="pte">PTE Score</label>
+                  <input type="number" class="form-control" id="pte" placeholder="PTE Score" name="pte">
+                </div> 
+
+                <div class="form-group">
+                  <label>Priority Country</label>
+                  <select class="form-control" name="priority_country">
+                    <option value="Germany">Germany</option>
+                    <option value="USA">USA</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Australia">Australia</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Canada">Canada</option>
+                    <option value="India">India</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Malta">Malta</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="remarks">Remarks</label>
+                  <textarea type="text" class="form-control" id="remarks" placeholder="remarks" name="remarks"></textarea>
+                </div>
+                <!-- /.input group -->
+              </div>
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          </div>
+        </div>
+{% endblock %}
+
+
+{% block script %}
+	<script src="{% static 'core/vendor/jquery/dist/jquery.min.js'%}"></script>
+	<script src="{% static 'core/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+	<script src="{% static 'core/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+{% endblock %}

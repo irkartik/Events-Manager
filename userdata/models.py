@@ -8,17 +8,18 @@ class Eligibility(models.Model):
 	address = models.TextField()
 	phone = models.PositiveIntegerField()
 	qualification = models.CharField(max_length=100)
-	ielts = models.PositiveIntegerField()
-	toefl = models.PositiveIntegerField()
-	sat = models.PositiveIntegerField()
-	gre = models.PositiveIntegerField()
-	gmat = models.PositiveIntegerField()
-	pte = models.PositiveIntegerField()
-	priority_country = models.CharField(max_length=100)
+	ielts = models.PositiveIntegerField(blank=True, null=True)
+	toefl = models.PositiveIntegerField(blank=True, null=True)
+	sat = models.PositiveIntegerField(blank=True, null=True)
+	gre = models.PositiveIntegerField(blank=True, null=True)
+	gmat = models.PositiveIntegerField(blank=True, null=True)
+	pte = models.PositiveIntegerField(blank=True, null=True)
+	priority_country = models.CharField(max_length=100, blank=True, null=True)
 	remarks = models.TextField()
+	created_date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return name.self
+		return self.name
 
 class Appointment(models.Model):
 	full_name = models.CharField(max_length=1000)
@@ -33,26 +34,27 @@ class Appointment(models.Model):
 	date = models.CharField(max_length=100)
 	time = models.CharField(max_length=100)
 	message = models.TextField()
+	created_date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.full_name
 
-
 class AppliedUser(models.Model):
+	created_date = models.DateTimeField(auto_now_add=True)
 	year = models.CharField(max_length=4, blank=True, null=True)
-	intake = models.CharField(max_length=50)
-	course = models.CharField(max_length=100)
-	country = models.CharField(max_length=50)
-	title = models.CharField(max_length=5)
-	last_name = models.CharField(max_length=10)
+	intake = models.CharField(max_length=50,blank=True, null=True)
+	course = models.CharField(max_length=100,blank=True, null=True)
+	permanent_country = models.CharField(max_length=50,blank=True, null=True)
+	title = models.CharField(max_length=5,blank=True, null=True)
+	last_name = models.CharField(max_length=10,blank=True, null=True)
 	middle_name = models.CharField(max_length=10, blank=True, null=True)
-	first_name = models.CharField(max_length=10)
-	date_of_birth = models.CharField(max_length=10)
-	place_of_birth = models.CharField(max_length=100)
-	sex = models.CharField(max_length=10)
-	nationality = models.CharField(max_length=50)
-	marital_status = models.CharField(max_length=50)
-	citizenship_number = models.CharField(max_length=100)
+	first_name = models.CharField(max_length=10,blank=True, null=True)
+	date_of_birth = models.CharField(max_length=10,blank=True, null=True)
+	place_of_birth = models.CharField(max_length=100,blank=True, null=True)
+	sex = models.CharField(max_length=10,blank=True, null=True)
+	nationality = models.CharField(max_length=50,blank=True, null=True)
+	marital_status = models.CharField(max_length=50,blank=True, null=True)
+	citizenship_number = models.CharField(max_length=100, blank=True, null=True)
 	passport_number = models.CharField(max_length=100, null=True, blank=True)
 	date_of_issue = models.CharField(max_length=100, null=True, blank=True)
 	date_of_expiry = models.CharField(max_length=100, null=True, blank=True)
@@ -61,10 +63,10 @@ class AppliedUser(models.Model):
 	street_name_number = models.CharField(max_length=1000, null=True, blank=True)
 	city = models.CharField(max_length=100, null=True, blank=True)
 	state = models.CharField(max_length=100, null=True, blank=True)
-	country = models.CharField(max_length=100)
+	country = models.CharField(max_length=100, blank=True, null=True)
 	phone = models.PositiveIntegerField(null=True, blank=True)
-	mobile = models.PositiveIntegerField()
-	email = models.EmailField()
+	mobile = models.PositiveIntegerField(blank=True, null=True)
+	email = models.EmailField(blank=True, null=True)
 	is_permanent = models.BooleanField(max_length=10)
 	
 	school_name = models.CharField(max_length=1000, null=True, blank=True)
@@ -101,12 +103,12 @@ class AppliedUser(models.Model):
 	graduate_marks_obtained = models.CharField(max_length=100, null=True, blank=True)
 	graduate_date_of_completion = models.CharField(max_length=100, null=True, blank=True)
 
-	ielts = models.PositiveIntegerField(blank=True, null=True)
-	toefl = models.PositiveIntegerField(blank=True, null=True)
-	sat = models.PositiveIntegerField(blank=True, null=True)
-	gre = models.PositiveIntegerField(blank=True, null=True)
-	gmat = models.PositiveIntegerField(blank=True, null=True)
-	pte = models.PositiveIntegerField(blank=True, null=True)
+	ielts = models.CharField(max_length=100, blank=True, null=True)
+	toefl = models.CharField(max_length=100, blank=True, null=True)
+	sat = models.CharField(max_length=100, blank=True, null=True)
+	gre = models.CharField(max_length=100, blank=True, null=True)
+	gmat = models.CharField(max_length=100, blank=True, null=True)
+	pte = models.CharField(max_length=100, blank=True, null=True)
 
 	employment_current_employer = models.CharField(max_length=1000, blank=True, null=True)
 	field_of_activity = models.CharField(max_length=1000,blank=True, null=True)
@@ -114,7 +116,7 @@ class AppliedUser(models.Model):
 	start_date = models.CharField(max_length=100,blank=True, null=True)
 	department = models.CharField(max_length=100,blank=True, null=True)
 	employment_type = models.CharField(max_length=100,blank=True, null=True)
-	responsibilites = models.TextField()
+	responsibilites = models.TextField(blank=True, null=True)
 
 	previous_employer = models.CharField(max_length=1000,blank=True, null=True )	
 	previous_location = models.CharField(max_length=1000, blank=True, null=True)
@@ -132,10 +134,10 @@ class AppliedUser(models.Model):
 	question7 = models.CharField(max_length=1000, blank=True, null=True)
 	question8 = models.CharField(max_length=1000, blank=True, null=True)
 
-	statement_of_purpose = models.TextField()
+	statement_of_purpose = models.TextField(blank=True, null=True)
 
-	photograph = models.ImageField()
-	resume = models.FileField()
+	photograph = models.ImageField(blank=True, null=True)
+	resume = models.FileField(blank=True, null=True)
 	passport_copy = models.FileField(blank=True, null=True)
 	citizenship_copy = models.FileField(blank=True, null=True)
 	school_education_certificate = models.FileField(blank=True, null=True)
@@ -144,5 +146,11 @@ class AppliedUser(models.Model):
 	graduate_certificate = models.FileField(blank=True, null=True)
 	test = models.FileField(blank=True, null=True)
 
+	certification = models.BooleanField()
+
 	signature_name = models.CharField(max_length=100)
 	date_of_signature = models.CharField(max_length=100)
+
+	def __str__(self):
+		name = self.first_name + " " + self.middle_name + " " + self.last_name
+		return name

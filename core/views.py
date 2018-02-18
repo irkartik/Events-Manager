@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as authUser
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,9 @@ from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+
+from rest_framework import viewsets
+from .serializers import UserSerializer, EventSerializer
 
 # Create your views here.
 
@@ -173,3 +176,18 @@ def user_delete(request, user_id):
 	messages.add_message(request, messages.INFO, "Successfully Deleted User")
 	return redirect('show_users')
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows events to be viewed or edited.
+    """
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
