@@ -4,7 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .serializers import AppointmentSerializer, EligibilitySerializer, AppliedUserSerializer
 
 
@@ -30,6 +30,26 @@ class AppliedUserViewSet(viewsets.ModelViewSet):
     queryset = AppliedUser.objects.all().order_by('-created_date')
     serializer_class = AppliedUserSerializer
 
+class AppointmentIndivisual(generics.ListAPIView):
+	serializer_class = AppointmentSerializer
+
+	def get_queryset(self):
+		appointment_id = self.kwargs['appointment_id']
+		return Appointment.objects.filter(id=appointment_id)
+
+class AppliedUserIndivisual(generics.ListAPIView):
+	serializer_class = AppliedUserSerializer
+
+	def get_queryset(self):
+		applieduser_id = self.kwargs['applieduser_id']
+		return AppliedUser.objects.filter(id=applieduser_id)
+
+class EligibilityIndivisual(generics.ListAPIView):
+	serializer_class = EligibilitySerializer
+
+	def get_queryset(self):
+		eligibility_id = self.kwargs['eligibility_id']
+		return Eligibility.objects.filter(id=eligibility_id)
 
 @login_required(login_url="/login")
 def show_appointments(request):
@@ -235,7 +255,12 @@ def apply_now(request):
 	else:
 		return render(request, 'userdata/apply_now.html')
 
-
+def full_appointment(request, appointment_id):
+	temp = Appointment.objects.get(id=appointment_id)
+	context = {
+		'appointment': temp
+	}
+	return render(request, 'userdata/full_appointment.html', context)
 
 
 

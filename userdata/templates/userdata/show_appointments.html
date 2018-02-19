@@ -25,37 +25,25 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>full_name</th>
-                    <th>address</th>
-                    <th>telephone_no</th>
+                    <th>Full Name</th>
                     <th>mobile_no</th>
                     <th>email</th>
                     <th>purpose_of_visit</th>
-                    <th>evidence_of_id</th>
-                    <th>evidence_of_id_number</th>
-                    <th>appointment</th>
                     <th>date</th>
                     <th>time</th>
-                    <th>message</th>
-                  </tr>
+                    </tr>
                   </thead>
                   <tbody>
                   	{% if appointments %}
 	                  	{% for data in appointments %}
 	                  		<tr>
           								<td>{{ data.full_name }}</td>
-          								<td>{{ data.address }}</td>
-          								<td>{{ data.telephone_no }}</td>
           								<td>{{ data.mobile_no }}</td>
                           <td>{{ data.email }}</td>
                           <td>{{ data.purpose_of_visit }}</td>
-                          <td>{{ data.evidence_of_id }}</td>
-                          <td>{{ data.evidence_of_id_number }}</td>
-                          <td>{{ data.appointment }}</td>
                           <td>{{ data.date }}</td>
                           <td>{{ data.time }}</td>
-                          <td>{{ data.message }}</td>
-                          <!-- <td><a href="{% url 'user_delete' user.id %}">Delete</a></td> -->
+                          <td><a href="{% url 'full_appointment' user.id %}">See Full Detail</a></td>
 								        </tr>
 	                  	{% endfor %}
 	                {% else %}

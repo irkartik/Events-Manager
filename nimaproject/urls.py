@@ -34,7 +34,11 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('userdata.urls')),
     path('', include(router.urls)),
-    path('api-auth', include('rest_framework.urls'), name='rest_framework')
+    path('api-auth', include('rest_framework.urls'), name='rest_framework'),
+    #url(r'appointment/(?P<movie_id>.+)/', views.AppointmentIndivisual.as_view()),
+    path('api/appointments/<int:appointment_id>', userdataviews.AppointmentIndivisual.as_view()),
+    path('api/appliedusers/<int:applieduser_id>', userdataviews.AppliedUserIndivisual.as_view()),
+    path('api/eligibility/<int:eligibility_id>', userdataviews.EligibilityIndivisual.as_view()),
 ]
 
 if settings.DEBUG:
