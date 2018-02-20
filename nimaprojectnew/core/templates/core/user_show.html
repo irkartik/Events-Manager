@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Language{% endblock %}
+
+{% block content %}
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Users</h3>
+			{% if messages %}
+			    <ul class="messages">
+			        {% for message in messages %}
+			            <p>{{ message }}</p>
+			        {% endfor %}
+			    </ul>
+			{% endif %}
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Date Created</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  	{% if users %}
+	                  	{% for user in users %}
+	                  		<tr>
+          								<td>{{ user.name }}</td>
+          								<td>{{ user.email }}</td>
+          								<td>{{ user.phone }}</td>
+          								<td>{{ user.created_date }}</td>
+                          <td><a href="{% url 'user_delete' user.id %}">Delete</a></td>
+								        </tr>
+	                  	{% endfor %}
+	                {% else %}
+						<td>No Data</td>
+					{% endif %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <a href="{% url 'user_add' %}" class="btn btn-sm btn-info btn-flat pull-left">Add New User</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+{% endblock %}

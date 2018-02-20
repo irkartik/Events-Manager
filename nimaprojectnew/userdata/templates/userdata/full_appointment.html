@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Full Profile{% endblock %}
+
+{% block content %}
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Full Profile</h3>
+			{% if messages %}
+			    <ul class="messages">
+			        {% for message in messages %}
+			            <p>{{ message }}</p>
+			        {% endfor %}
+			    </ul>
+			{% endif %}
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <tbody>
+                    <tr>
+                      <th>Full Name</th>
+                      <td>{{appointment.full_name}}</td>
+                    </tr>
+                     <tr>
+                         <th>address</th>                     
+                         <td>{{appointment.address}}</td>
+                     </tr>
+                     <tr>
+                         <th>telephone_no</th>                     
+                         <td>{{appointment.telephone_no}}</td>
+                     </tr>
+                     <tr>
+                         <th>mobile_no</th>                     
+                         <td>{{appointment.mobile_no}}</td>
+                     </tr>
+                     <tr>
+                         <th>email</th>                     
+                         <td>{{appointment.email}}</td>
+                     </tr>
+                     <tr>
+                         <th>purpose_of_visit</th>                     
+                         <td>{{appointment.purpose_of_visit}}</td>
+                     </tr>
+                     <tr>
+                         <th>evidence_of_id</th>                     
+                         <td>{{appointment.evidence_of_id}}</td>
+                     </tr>
+                     <tr>
+                        <th> evidence_of_id_number</th>                     
+                        <td> {{appointment.evidence_of_id_number}}</td>
+                     </tr>
+                     <tr>
+                         <th>appointment</th>                     
+                         <td>{{appointment.appointment}}</td>
+                     </tr>
+                     <tr>
+                         <th>date</th>                     
+                         <td>{{appointment.date}}</td>
+                     </tr>
+                     <tr>
+                         <th>time</th>                     
+                         <td>{{appointment.time}}</td>
+                     </tr>
+                     <tr>
+                         <th>message</th>                     
+                         <td>{{appointment.message}}</td>
+                     </tr>
+                     <tr>
+                         <th>created_date</th>                  
+                         <td>{{appointment.created_date}}</td>
+                    </tr>
+                     </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- <div class="box-footer clearfix">
+              <a href="{% url 'user_add' %}" class="btn btn-sm btn-info btn-flat pull-left">Add New User</a>
+            </div> -->
+            <!-- /.box-footer -->
+          </div>
+{% endblock %}

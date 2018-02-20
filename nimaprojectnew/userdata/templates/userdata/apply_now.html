@@ -1,0 +1,556 @@
+{% extends 'core/base_naked.html' %}
+
+{% block title %}Apply Now{% endblock %}
+{% load static %}
+{% block content %}
+  <div class="row">
+    <div class="container">
+	<div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Apply Now</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" method='post' action="{% url 'apply_now' %}" enctype="multipart/form-data">{% csrf_token %}
+              <div class="box-body">
+                <div class="form-group">
+                  <label>Year</label>
+                  <select name="year" class="form-control">
+                    <option>Select</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Intake</label>
+                  <select name="intake" class="form-control">
+                    <option value="Spring (Jan - Feb)">Spring (Jan - Feb)</option>
+                    <option value="Summer (Mar - Apr)">Summer (Mar - Apr)</option>
+                    <option value="Summer (Jun - Jul)">Summer (Jun - Jul)</option>
+                    <option value="Fall (Aug - Oct)">Fall (Aug - Oct)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="course">Course</label>
+                  <input type="text" class="form-control" id="course" placeholder="Course" name="course">
+                </div>
+                <div class="form-group">
+                  <label>Country</label>
+                  <select class="form-control" name="permanent_country">
+                    <option value="Germany">Germany</option>
+                    <option value="USA">USA</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Australia">Australia</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Canada">Canada</option>
+                    <option value="India">India</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Malta">Malta</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Title</label>
+                  <select class="form-control" name="title">
+                    <option value="Mr.">Mr.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Miss.">Miss.</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="last_name">Last Name</label>
+                  <input type="text" class="form-control" id="last_name" placeholder="Last Name" name="last_name">
+                </div>
+                <div class="form-group">
+                  <label for="middle_name">Middle Name</label>
+                  <input type="text" class="form-control" id="middle_name" placeholder="Middle Name" name="middle_name">
+                </div>
+                <div class="form-group">
+                  <label for="text">First Name</label>
+                  <input type="first_name" class="form-control" id="first_name" placeholder="First Name" name="first_name">
+                </div>
+                <div class="form-group">
+                  <label for="date_of_birth">Date of Birth</label>
+                  <input type="date" class="form-control" id="date_of_birth" placeholder="Date of Birth" name="date_of_birth">
+                </div>
+                <div class="form-group">
+                  <label for="place_of_birth">Place of Birth</label>
+                  <input type="text" class="form-control" id="place_of_birth" placeholder="Place of Birth" name="place_of_birth">
+                </div>
+                <div class="form-group">
+                  <label>Sex</label>
+                  <select name="sex" class="form-control">
+                    <option>Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="nationality">Nationality</label>
+                  <input type="text" class="form-control" id="nationality" placeholder="Nationality" name="nationality">
+                </div>
+                <div class="form-group">
+                  <label>Marital Status</label>
+                  <select name="marital_status" class="form-control">
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Divorced">Divorced</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="citizenship_number">Citizenship_number</label>
+                  <input type="text" class="form-control" id="citizenship_number" placeholder="Citizenship Number" name="citizenship_number">
+                </div>
+                <div class="form-group">
+                  <label for="passport_number">Passport Number</label>
+                  <input type="text" class="form-control" id="passport_number" placeholder="Nationality" name="passport_number">
+                </div>
+                <div class="form-group">
+                  <label for="date_of_issue">Date of Issue</label>
+                  <input type="date" class="form-control" id="date_of_issue" placeholder="Date of Issue" name="date_of_issue">
+                </div>
+                <div class="form-group">
+                  <label for="date_of_expiry">Date of Expiry</label>
+                  <input type="date" class="form-control" id="date_of_expiry" placeholder="Date of Expiry" name="date_of_expiry">
+                </div>
+                <div class="form-group">
+                  <label for="place_of_issue">Place Of Issue</label>
+                  <input type="text" class="form-control" id="place_of_issue" placeholder="Place of Issue" name="place_of_issue">
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Mailing Address</h3>
+                </div>
+
+                <div class="form-group">
+                  <label for="street_name_number">Street Name & Number</label>
+                  <input type="text" class="form-control" id="street_name_number" placeholder="Street Name & Number" name="street_name_number">
+                </div>
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" id="city" placeholder="City" name="city">
+                </div>
+                <div class="form-group">
+                  <label for="state">State | Province</label>
+                  <input type="text" class="form-control" id="state" placeholder="State | Province" name="state">
+                </div>
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" id="country" placeholder="Country" name="country">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="number" class="form-control" id="phone" placeholder="Phone" name="phone">
+                </div>
+                <div class="form-group">
+                  <label for="mobile">Mobile</label>
+                  <input type="number" class="form-control" id="mobile" placeholder="Mobile" name="mobile">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                </div>
+
+                <div class="form-group">
+                  <label>Is this your permanent Address?</label>
+                  <select class="form-control" name="is_permanent">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Education</h3>
+                  <h6>School Education Certificate</h6>
+                </div>
+
+                <div class="form-group">
+                  <label for="school_name">School Name</label>
+                  <input type="text" class="form-control" id="school_name" placeholder="Name" name="school_name">
+                </div>
+                <div class="form-group">
+                  <label for="school_city">City</label>
+                  <input type="text" class="form-control" id="school_city" placeholder="City" name="school_city">
+                </div>
+                <div class="form-group">
+                  <label for="school_state">State</label>
+                  <input type="text" class="form-control" id="school_state" placeholder="State" name="school_state">
+                </div>
+                <div class="form-group">
+                  <label for="school_country">Country</label>
+                  <input type="text" class="form-control" id="school_country" placeholder="Country" name="school_country">
+                </div>
+                <div class="form-group">
+                  <label for="school_qualification_obtained">Qualification Obtained</label>
+                  <input type="text" class="form-control" id="school_qualification_obtained" placeholder="Qualification Obtained" name="school_qualification_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="school_marks_obtained">CGPA | GPA | Grade | %</label>
+                  <input type="text" class="form-control" id="school_marks_obtained" placeholder="Marks Obtained" name="school_marks_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="school_date_of_completion">Date of Completion</label>
+                  <input type="text" class="form-control" id="school_date_of_completion" placeholder="Date of Completion" name="school_date_of_completion">
+                </div>
+
+                <div class="box-header with-border">
+                  <h6>High School Certificate</h6>
+                </div>
+
+                <div class="form-group">
+                  <label for="high_school_name">School Name</label>
+                  <input type="text" class="form-control" id="high_school_name" placeholder="Name" name="high_school_name">
+                </div>
+                <div class="form-group">
+                  <label for="high_school_city">City</label>
+                  <input type="text" class="form-control" id="high_school_city" placeholder="City" name="high_school_city">
+                </div>
+                <div class="form-group">
+                  <label for="high_school_state">State</label>
+                  <input type="text" class="form-control" id="high_school_state" placeholder="State" name="high_school_state">
+                </div>
+                <div class="form-group">
+                  <label for="high_school_country">Country</label>
+                  <input type="text" class="form-control" id="high_school_country" placeholder="Country" name="high_school_country">
+                </div>
+                <div class="form-group">
+                  <label for="high_school_qualification_obtained">Qualification Obtained</label>
+                  <input type="text" class="form-control" id="high_school_qualification_obtained" placeholder="Qualification Obtained" name="high_school_qualification_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="high_school_marks_obtained">CGPA | GPA | Grade | %</label>
+                  <input type="text" class="form-control" id="high_school_marks_obtained" placeholder="Marks Obtained" name="high_school_marks_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="high_school_date_of_completion">Date of Completion</label>
+                  <input type="text" class="form-control" id="high_school_date_of_completion" placeholder="Date of Completion" name="high_school_date_of_completion">
+                </div>
+                
+                <div class="box-header with-border">
+                  <h6>Undergraduate Certificate</h6>
+                </div>
+
+                <div class="form-group">
+                  <label for="undergrad_university">University</label>
+                  <input type="text" class="form-control" id="undergrad_university" placeholder="Name" name="undergrad_university">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_city">City</label>
+                  <input type="text" class="form-control" id="undergrad_city" placeholder="City" name="undergrad_city">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_state">State</label>
+                  <input type="text" class="form-control" id="undergrad_state" placeholder="State" name="undergrad_state">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_country">Country</label>
+                  <input type="text" class="form-control" id="undergrad_country" placeholder="Country" name="undergrad_country">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_degree_obtained">Degree Obtained</label>
+                  <input type="text" class="form-control" id="undergrad_degree_obtained" placeholder="Degree Obtained" name="undergrad_degree_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_major_subject">Major Subject</label>
+                  <input type="text" class="form-control" id="undergrad_major_subject" placeholder="Major Subject" name="undergrad_major_subject">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_marks_obtained">CGPA | GPA | Grade | %</label>
+                  <input type="text" class="form-control" id="undergrad_marks_obtained" placeholder="Marks Obtained" name="undergrad_marks_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="undergrad_date_of_completion">Date of Completion</label>
+                  <input type="text" class="form-control" id="undergrad_date_of_completion" placeholder="Date of Completion" name="undergrad_date_of_completion">
+                </div>
+
+                <div class="box-header with-border">
+                  <h6>Graduate Certificate</h6>
+                </div>
+
+                <div class="form-group">
+                  <label for="graduate_university">University</label>
+                  <input type="text" class="form-control" id="graduate_university" placeholder="Name" name="graduate_university">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_city">City</label>
+                  <input type="text" class="form-control" id="graduate_city" placeholder="City" name="graduate_city">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_state">State</label>
+                  <input type="text" class="form-control" id="graduate_state" placeholder="State" name="graduate_state">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_country">Country</label>
+                  <input type="text" class="form-control" id="graduate_country" placeholder="Country" name="graduate_country">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_degree_obtained">Degree Obtained</label>
+                  <input type="text" class="form-control" id="graduate_degree_obtained" placeholder="Degree Obtained" name="graduate_degree_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_major_subject">Major Subject</label>
+                  <input type="text" class="form-control" id="graduate_major_subject" placeholder="Major Subject" name="graduate_major_subject">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_marks_obtained">CGPA | GPA | Grade | %</label>
+                  <input type="text" class="form-control" id="graduate_marks_obtained" placeholder="Marks Obtained" name="graduate_marks_obtained">
+                </div>
+                <div class="form-group">
+                  <label for="graduate_date_of_completion">Date of Completion</label>
+                  <input type="text" class="form-control" id="graduate_date_of_completion" placeholder="Date of Completion" name="graduate_date_of_completion">
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Tests</h3>
+                </div>
+
+                <div class="form-group">
+                  <label for="ielts">IELTS Score (if any)</label>
+                  <input type="text" class="form-control" id="ielts" placeholder="Major Subject" name="ielts">
+                </div>
+                <div class="form-group">
+                  <label for="toefl">TOEFL Score (if any)</label>
+                  <input type="text" class="form-control" id="toefl" placeholder="TOEFL Score" name="toefl">
+                </div>
+                <div class="form-group">
+                  <label for="sat">SAT Score (if any)</label>
+                  <input type="text" class="form-control" id="sat" placeholder="SAT Score" name="sat">
+                </div>
+                <div class="form-group">
+                  <label for="gre">GRE Score (if any)</label>
+                  <input type="text" class="form-control" id="gre" placeholder="GRE Score" name="gre">
+                </div>
+                <div class="form-group">
+                  <label for="gmat">GMAT Score (if any)</label>
+                  <input type="text" class="form-control" id="gmat" placeholder="GMAT Score" name="gmat">
+                </div>
+                <div class="form-group">
+                  <label for="pte">PTE Score (if any)</label>
+                  <input type="text" class="form-control" id="pte" placeholder="PTE Score" name="pte">
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Current Employer (if any)</h3>
+                </div>
+
+                <div class="form-group">
+                  <label for="employment_current_employer">Current Employer</label>
+                  <input type="text" class="form-control" id="employment_current_employer" placeholder="Current Employer" name="employment_current_employer">
+                </div>
+                <div class="form-group">
+                  <label for="field_of_activity">Field of Activity</label>
+                  <input type="text" class="form-control" id="field_of_activity" placeholder="Field of Activity" name="field_of_activity">
+                </div>
+                <div class="form-group">
+                  <label for="position">Position</label>
+                  <input type="text" class="form-control" id="position" placeholder="Position" name="position">
+                </div>
+                <div class="form-group">
+                  <label for="start_date">Start Date</label>
+                  <input type="text" class="form-control" id="start_date" placeholder="GMAT Score" name="start_date">
+                </div>
+                <div class="form-group">
+                  <label for="department">Department</label>
+                  <input type="text" class="form-control" id="department" placeholder="Department" name="department">
+                </div>
+                <div class="form-group">
+                  <label>Employment Type</label>
+                  <select name="employment_type" class="form-control">
+                    <option>Select</option>
+                    <option value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                    <option value="Contract">Contract</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Describe Your Responsibilities</label>
+                  <textarea name="responsibilites" class="form-control"></textarea>
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Previous Job Experience</h3>
+                </div>
+
+                <div class="form-group">
+                  <label for="previous_employer">Employer</label>
+                  <input type="text" class="form-control" id="previous_employer" placeholder="Employer" name="previous_employer">
+                </div>
+                <div class="form-group">
+                  <label for="previous_location">Location</label>
+                  <input type="text" class="form-control" id="previous_location" placeholder="Location" name="previous_location">
+                </div>
+                <div class="form-group">
+                  <label for="previous_job_title">job_title</label>
+                  <input type="text" class="form-control" id="previous_job_title" placeholder="Job Title" name="previous_job_title">
+                </div>
+                <div class="form-group">
+                  <label for="previous_start_date">Start Date</label>
+                  <input type="text" class="form-control" id="previous_start_date" placeholder="Start Date" name="previous_start_date">
+                </div>
+                <div class="form-group">
+                  <label for="previous_end_date">End Date</label>
+                  <input type="text" class="form-control" id="previous_end_date" placeholder="End Date" name="previous_end_date">
+                </div>
+                <div class="form-group">
+                  <label>Employment Type</label>
+                  <select name="previous_employment_type" class="form-control">
+                    <option>Select</option>
+                    <option value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                    <option value="Contract">Contract</option>
+                  </select>
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Other Information</h3>
+                </div>
+
+                <div class="form-group">
+                  <label>How Did You First Learn About NIMAS Education Programs?</label>
+                  <input type="text" name="question1" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>Fair Or Exhibition. Which One?</label>
+                  <input type="text" name="question2" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>Advertising In The Press. Which Newspaper/ Magazine?</label>
+                  <input type="text" name="question3" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>Recommendation From Former Student? Name?</label>
+                  <input type="text" name="question4" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>Internet? Which Website / Search Engine?</label>
+                  <input type="text" name="question5" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>Social Network. Which One?</label>
+                  <input type="text" name="question6" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>TV Network. Which One?</label>
+                  <input type="text" name="question7" class="form-control">               
+                </div>
+
+                <div class="form-group">
+                  <label>Other. Please Specifiy.</label>
+                  <input type="text" name="question8" class="form-control">               
+                </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Statement of Purpose</h3>
+                </div>
+
+                <div class="form-group">
+                  <label>Statement Of Purpose</label>
+                  <textarea class="form-control" name="statement_of_purpose"></textarea>                  
+                 </div>
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Please Attach Your Document Here</h3>
+                </div>
+
+                
+                <div class="form-group">
+                  <label>Photograph (Passport Size)</label>
+                  <input type="file" name="photograph" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>resume</label>
+                  <input type="file" name="resume" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>passport_copy</label>
+                  <input type="file" name="passport_copy" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>citizenship_copy</label>
+                  <input type="file" class="form-control" name="citizenship_copy">
+                </div>
+
+                <div class="form-group">
+                  <label>school_education_certificate</label>
+                  <input type="file" class="form-control" name="school_education_certificate">
+                </div>
+
+                <div class="form-group">
+                  <label>high_school_certificate</label>
+                  <input type="file" class="form-control" name="high_school_certificate">
+                </div>
+
+                <div class="form-group">
+                  <label>undergrad_certificate</label>
+                  <input type="file" name="undergrad_certificate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>graduate_certificate</label>
+                  <input class="form-control" type="file" name="graduate_certificate">
+                </div>
+
+                <div class="form-group">
+                  <label>test</label>
+                  <input type="file" name="test" class="form-control">
+                </div>
+
+
+                <div class="box-header with-border">
+                  <h3 class="box-title">Certification</h3>
+                </div>
+
+                <div class="form-group">
+                  <input type="checkbox" name="certification">
+                  <label>I understand and accept the terms and conditions that govern the admissions procedure and participation in any program at NIMAS Education. I certify that the information I have provided in the application is complete and accurate and attached my documents are genuine and honestly presented.</label>
+                </div>
+
+
+                <div class="form-group">
+                  <label>Your Signature</label>
+                  <input type="text" name="signature_name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>Date of Signature</label>
+                  <input type="text" name="date_of_signature" class="form-control">
+                </div>
+
+
+
+
+                <!-- /.input group -->
+              </div>
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          </div>
+        </div>
+{% endblock %}
+
+
+{% block script %}
+	<script src="{% static 'core/vendor/jquery/dist/jquery.min.js'%}"></script>
+	<script src="{% static 'core/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+	<script src="{% static 'core/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+{% endblock %}

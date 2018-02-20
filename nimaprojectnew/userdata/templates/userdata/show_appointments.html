@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block content %}
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Appointments</h3>
+			{% if messages %}
+			    <ul class="messages">
+			        {% for message in messages %}
+			            <p>{{ message }}</p>
+			        {% endfor %}
+			    </ul>
+			{% endif %}
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>mobile_no</th>
+                    <th>email</th>
+                    <th>purpose_of_visit</th>
+                    <th>date</th>
+                    <th>time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  	{% if appointments %}
+	                  	{% for data in appointments %}
+	                  		<tr>
+          								<td>{{ data.full_name }}</td>
+          								<td>{{ data.mobile_no }}</td>
+                          <td>{{ data.email }}</td>
+                          <td>{{ data.purpose_of_visit }}</td>
+                          <td>{{ data.date }}</td>
+                          <td>{{ data.time }}</td>
+                          <td><a href="{% url 'full_appointment' user.id %}">See Full Detail</a></td>
+								        </tr>
+	                  	{% endfor %}
+	                {% else %}
+						<td>No Data</td>
+					{% endif %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- <div class="box-footer clearfix">
+              <a href="{% url 'user_add' %}" class="btn btn-sm btn-info btn-flat pull-left">Add New User</a>
+            </div> -->
+            <!-- /.box-footer -->
+          </div>
+{% endblock %}

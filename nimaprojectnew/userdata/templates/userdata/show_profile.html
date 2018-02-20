@@ -1,0 +1,324 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Full Profile{% endblock %}
+
+{% block content %}
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Full Profile</h3>
+			{% if messages %}
+			    <ul class="messages">
+			        {% for message in messages %}
+			            <p>{{ message }}</p>
+			        {% endfor %}
+			    </ul>
+			{% endif %}
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+        <tr>          <tbody>
+<th>year</th>
+<td>{{ user.year }}</td>
+<tr>
+<th>intake</th>
+<td>{{ user.intake }}</td>
+<tr>
+<th>course</th>
+<td>{{ user.course }}</td>
+<tr>
+<th>permanent_country</th>
+<td>{{ user.permanent_country }}</td>
+<tr>
+<th>title</th>
+<td>{{ user.title }}</td>
+<tr>
+<th>last_name</th>
+<td>{{ user.last_name }}</td>
+<tr>
+<th>middle_name</th>
+<td>{{ user.middle_name }}</td>
+<tr>
+<th>first_name</th>
+<td>{{ user.first_name }}</td>
+<tr>
+<th>date_of_birth</th>
+<td>{{ user.date_of_birth }}</td>
+<tr>
+<th>place_of_birth</th>
+<td>{{ user.place_of_birth }}</td>
+<tr>
+<th>sex</th>
+<td>{{ user.sex }}</td>
+<tr>
+<th>nationality</th>
+<td>{{ user.nationality }}</td>
+<tr>
+<th>marital_status</th>
+<td>{{ user.marital_status }}</td>
+<tr>
+<th>citizenship_number</th>
+<td>{{ user.citizenship_number }}</td>
+<tr>
+<th>passport_number</th>
+<td>{{ user.passport_number }}</td>
+<tr>
+<th>date_of_issue</th>
+<td>{{ user.date_of_issue }}</td>
+<tr>
+<th>date_of_expiry</th>
+<td>{{ user.date_of_expiry }}</td>
+<tr>
+<th>place_of_issue</th>
+<td>{{ user.place_of_issue }}</td>
+<tr>
+<th>street_name_number</th>
+<td>{{ user.street_name_number }}</td>
+<tr>
+<th>city</th>
+<td>{{ user.city }}</td>
+<tr>
+<th>state</th>
+<td>{{ user.state }}</td>
+<tr>
+<th>country</th>
+<td>{{ user.country }}</td>
+<tr>
+<th>phone</th>
+<td>{{ user.phone }}</td>
+<tr>
+<th>mobile</th>
+<td>{{ user.mobile }}</td>
+<tr>
+<th>email</th>
+<td>{{ user.email }}</td>
+<tr>
+<th>is_permanent</th>
+<td>{{ user.is_permanent }}</td>
+<tr>
+<th>school_name</th>
+<td>{{ user.school_name }}</td>
+<tr>
+<th>school_city</th>
+<td>{{ user.school_city }}</td>
+<tr>
+<th>school_state</th>
+<td>{{ user.school_state }}</td>
+<tr>
+<th>school_country</th>
+<td>{{ user.school_country }}</td>
+<tr>
+<th>school_qualification_obtained</th>
+<td>{{ user.school_qualification_obtained }}</td>
+<tr>
+<th>school_marks_obtained</th>
+<td>{{ user.school_marks_obtained }}</td>
+<tr>
+<th>school_date_of_completion</th>
+<td>{{ user.school_date_of_completion }}</td>
+<tr>
+<th>high_school_name</th>
+<td>{{ user.high_school_name }}</td>
+<tr>
+<th>high_school_city</th>
+<td>{{ user.high_school_city }}</td>
+<tr>
+<th>high_school_state</th>
+<td>{{ user.high_school_state }}</td>
+<tr>
+<th>high_school_country</th>
+<td>{{ user.high_school_country }}</td>
+<tr>
+<th>high_school_qualification_obtained</th>
+<td>{{ user.high_school_qualification_obtained }}</td>
+<tr>
+<th>high_school_marks_obtained</th>
+<td>{{ user.high_school_marks_obtained }}</td>
+<tr>
+<th>high_school_date_of_completion</th>
+<td>{{ user.high_school_date_of_completion }}</td>
+<tr>
+<th>undergrad_university</th>
+<td>{{ user.undergrad_university }}</td>
+<tr>
+<th>undergrad_city</th>
+<td>{{ user.undergrad_city }}</td>
+<tr>
+<th>undergrad_state</th>
+<td>{{ user.undergrad_state }}</td>
+<tr>
+<th>undergrad_country</th>
+<td>{{ user.undergrad_country }}</td>
+<tr>
+<th>undergrad_degree_obtained</th>
+<td>{{ user.undergrad_degree_obtained }}</td>
+<tr>
+<th>undergrad_major_subject</th>
+<td>{{ user.undergrad_major_subject }}</td>
+<tr>
+<th>undergrad_marks_obtained</th>
+<td>{{ user.undergrad_marks_obtained }}</td>
+<tr>
+<th>undergrad_date_of_completion</th>
+<td>{{ user.undergrad_date_of_completion }}</td>
+<tr>
+<th>graduate_university</th>
+<td>{{ user.graduate_university }}</td>
+<tr>
+<th>graduate_city</th>
+<td>{{ user.graduate_city }}</td>
+<tr>
+<th>graduate_state</th>
+<td>{{ user.graduate_state }}</td>
+<tr>
+<th>graduate_country</th>
+<td>{{ user.graduate_country }}</td>
+<tr>
+<th>graduate_degree_obtained</th>
+<td>{{ user.graduate_degree_obtained }}</td>
+<tr>
+<th>graduate_major_subject</th>
+<td>{{ user.graduate_major_subject }}</td>
+<tr>
+<th>graduate_marks_obtained</th>
+<td>{{ user.graduate_marks_obtained }}</td>
+<tr>
+<th>graduate_date_of_completion</th>
+<td>{{ user.graduate_date_of_completion }}</td>
+<tr>
+<th>ielts</th>
+<td>{{ user.ielts }}</td>
+<tr>
+<th>toefl</th>
+<td>{{ user.toefl }}</td>
+<tr>
+<th>sat</th>
+<td>{{ user.sat }}</td>
+<tr>
+<th>gre</th>
+<td>{{ user.gre }}</td>
+<tr>
+<th>gmat</th>
+<td>{{ user.gmat }}</td>
+<tr>
+<th>pte</th>
+<td>{{ user.pte }}</td>
+<tr>
+<th>employment_current_employer</th>
+<td>{{ user.employment_current_employer }}</td>
+<tr>
+<th>field_of_activity</th>
+<td>{{ user.field_of_activity }}</td>
+<tr>
+<th>position</th>
+<td>{{ user.position }}</td>
+<tr>
+<th>start_date</th>
+<td>{{ user.start_date }}</td>
+<tr>
+<th>department</th>
+<td>{{ user.department }}</td>
+<tr>
+<th>employment_type</th>
+<td>{{ user.employment_type }}</td>
+<tr>
+<th>responsibilites</th>
+<td>{{ user.responsibilites }}</td>
+<tr>
+<th>previous_employer</th>
+<td>{{ user.previous_employer }}</td>
+<tr>
+<th>previous_location</th>
+<td>{{ user.previous_location }}</td>
+<tr>
+<th>previous_job_title</th>
+<td>{{ user.previous_job_title }}</td>
+<tr>
+<th>previous_start_date</th>
+<td>{{ user.previous_start_date }}</td>
+<tr>
+<th>previous_end_date</th>
+<td>{{ user.previous_end_date }}</td>
+<tr>
+<th>previous_employment_type</th>
+<td>{{ user.previous_employment_type }}</td>
+<tr>
+<th>question1</th>
+<td>{{ user.question1 }}</td>
+<tr>
+<th>question2</th>
+<td>{{ user.question2 }}</td>
+<tr>
+<th>question3</th>
+<td>{{ user.question3 }}</td>
+<tr>
+<th>question4</th>
+<td>{{ user.question4 }}</td>
+<tr>
+<th>question5</th>
+<td>{{ user.question5 }}</td>
+<tr>
+<th>question6</th>
+<td>{{ user.question6 }}</td>
+<tr>
+<th>question7</th>
+<td>{{ user.question7 }}</td>
+<tr>
+<th>question8</th>
+<td>{{ user.question8 }}</td>
+<tr>
+<th>statement_of_purpose</th>
+<td>{{ user.statement_of_purpose }}</td>
+<tr>
+<th>photograph</th>
+<td><a href="{{ user.photograph.url }}">{{ user.photograph }}</a></td>
+<tr>
+<th>resume</th>
+<td><a href="{{ user.resume.url }}">{{ user.resume }}</a></td>
+<tr>
+<th>passport_copy</th>
+<td><a href="{{ user.passport_copy.url }}">{{ user.passport_copy }}</a></td>
+<tr>
+<th>citizenship_copy</th>
+<td><a href="{{ user.citizenship_copy.url }}">{{ user.citizenship_copy }}</a></td>
+<tr>
+<th>school_education_certificate</th>
+<td><a href="{{ user.school_education_certificate.url }}">{{ user.school_education_certificate }}</a></td>
+<tr>
+<th>high_school_certificate</th>
+<td><a href="{{ user.high_school_certificate.url }}">{{ user.high_school_certificate }}</a></td>
+<tr>
+<th>undergrad_certificate</th>
+<td><a href="{{ user.undergrad_certificate.url }}">{{ user.undergrad_certificate }}</a></td>
+<tr>
+<th>graduate_certificate</th>
+<td><a href="{{ user.graduate_certificate.url }}">{{ user.graduate_certificate }}</a></td>
+<tr>
+<th>test</th>
+<td><a href="{{ user.test.url }}">{{ user.test }}</a></td>
+<tr>
+<th>signature_name</th>
+<td>{{ user.signature_name }}</td>
+<tr>
+<th>date_of_signature</th>
+<td>{{ user.date_of_signature }}</td>
+
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- <div class="box-footer clearfix">
+              <a href="{% url 'user_add' %}" class="btn btn-sm btn-info btn-flat pull-left">Add New User</a>
+            </div> -->
+            <!-- /.box-footer -->
+          </div>
+{% endblock %}

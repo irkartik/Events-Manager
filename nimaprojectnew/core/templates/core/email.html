@@ -1,0 +1,61 @@
+{% extends 'core/base_naked.html' %}
+
+{% block title %}Invitation Letter{% endblock %}
+
+{% block content %}
+		<section class="invoice">
+      <!-- title row -->
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-globe"></i> {{event.organized_by}}
+            <small class="pull-right">Date: {{ datetime }}</small>
+          </h2>
+        </div>
+        <!-- /.col -->
+      </div>
+    </div>
+      <!-- info row -->
+      <div class="container">
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          <img src="{{event.barcode.url }}"><br><br>
+          <b>Event ID:</b>{{ event.unique_code }}<br>
+          <!-- <b>Order ID:</b> 4F3S8J<br>
+           --><b>Ticket Price:</b> Rs. {{event.price}}<br>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4 invoice-col">
+          INVITATION
+          <address>
+            <strong>{{event.organized_by}}</strong><br><br>
+            <strong>Address and Timing of Event</strong><br>
+            {{ event.location }}<br>
+            {{ event.time }} - {{event.date}}<br>
+          </address>
+        </div>
+        <!-- /.col -->
+        <!-- <div class="col-sm-4 invoice-col">
+          To
+          <address>
+            <strong>John Doe</strong><br>
+            795 Folsom Ave, Suite 600<br>
+            San Francisco, CA 94107<br>
+            Phone: (555) 539-1037<br>
+            Email: john.doe@example.com
+          </address>
+        </div> -->
+        <!-- /.col -->
+        
+        </div>
+        <!-- /.col -->
+        <div class="container" style="margin-top:2em">
+        <div class="row">
+             <strong>About the Event:</strong> <br>
+             {{ event.description }}
+          </div>
+          
+      </div>
+    </div>
+    </section>
+{% endblock %}
