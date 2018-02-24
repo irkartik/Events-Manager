@@ -20,7 +20,7 @@
       <div class="container">
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-          <img src="{{event.barcode.url }}"><br><br>
+          <img src="{{ BASE_URL }}{{event.barcode.url }}"><br><br>
           <b>Event ID:</b>{{ event.unique_code }}<br>
           <!-- <b>Order ID:</b> 4F3S8J<br>
            --><b>Ticket Price:</b> Rs. {{event.price}}<br>

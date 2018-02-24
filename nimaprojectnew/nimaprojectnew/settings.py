@@ -25,7 +25,7 @@ SECRET_KEY = 'w#ec@1+oanzmjl*5mm_j73fx)=*e(p30!hi29z!=8zo1+(n#em'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'core',
     'userdata',
     'rest_framework',
+    "social_widgets",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,3 +134,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+BASE_URL = 'http://127.0.0.1:8000'

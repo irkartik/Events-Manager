@@ -10,12 +10,17 @@ from . import mybarcode
 import random
 from django.contrib import messages
 
+from nimaprojectnew.settings import BASE_URL
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 from rest_framework import viewsets
 from .serializers import UserSerializer, EventSerializer
+from django.utils.datastructures import MultiValueDictKeyError
+from exceptions import MasterException
+import json
+
 
 # Create your views here.
 
@@ -51,29 +56,35 @@ def logout_user(request):
 def dashboard(request):
 	context = {
 		'events' : Event.objects.all(),
+		'BASE_URL': BASE_URL,
 	}
 	return render(request, 'core/show_events.html', context)
 
 @login_required(login_url="/login/")
 def create(request):
 	if request.method=="POST":
-		name = request.POST.get("name")
+		name = request.POST.get("name",'fgfg')
 		description = request.POST.get("description") 
 		price = request.POST.get("price")
 		organized_by = request.POST.get("organizer")
 		date = request.POST.get("date")
 		time = request.POST.get("time")
-		image = request.FILES["image"]
 		location = request.POST.get("location")
-
-		temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
-		barcode_file_name = 'barcode_event_' + str(temp.id)
-		unique_code = random.randint(9000000,100000000)
-		barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
-		barcode = barcode.replace('media/', "")
-		temp.barcode = barcode
-		temp.unique_code = unique_code
-		temp.save()
+		try:
+			image = request.FILES["image"]
+		except MultiValueDictKeyError:
+			return HttpResponse(json.dumps({'error': "exception occurred"}))
+		try:
+			temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
+			barcode_file_name = 'barcode_event_' + str(temp.id)
+			unique_code = random.randint(9000000,100000000)
+			barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
+			barcode = barcode.replace('media/', "")
+			temp.barcode = barcode
+			temp.unique_code = unique_code
+			temp.save()
+		except Exception as e:
+			MasterException(e)
 
 		return redirect('dashboard')
 	else:
@@ -90,20 +101,25 @@ def delete_event(request, event_id):
 @login_required(login_url="/login/")
 def update_event(request, event_id):
 	if request.method=="POST":
-		name = request.POST.get("name")
-		description = request.POST.get("description") 
-		price = request.POST.get("price")
-		organized_by = request.POST.get("organizer")
-		date = request.POST.get("date")
-		time = request.POST.get("time")
-		image = request.FILES["image"]
-		location = request.POST.get("location")
-		print(request.FILES)
 		temp = Event.objects.get(id=event_id)
+		
+		try:
+			name = request.POST.get("name")
+			description = request.POST.get("description") 
+			price = request.POST.get("price")
+			organized_by = request.POST.get("organizer")
+			date = request.POST.get("date")
+			time = request.POST.get("time")
+		except Exception as e:
+			MasterException(e)
+		try:
+			image = request.FILES["image"]
+		except MultiValueDictKeyError:
+			image = temp.picture
 
-		if image is not None:
-			temp.picture = image
+		location = request.POST.get("location")
 
+		temp.picture = image
 		temp.name = name 
 		temp.description = description 
 		temp.price = price 
@@ -127,6 +143,7 @@ def send_email(request, event_id):
 	context = {
 		'event': Event.objects.get(id=event_id),
 		'datetime': datetime.now().date,
+		'BASE_URL': BASE_URL
 	}
 
 	subject = "Invitation for " + Event.objects.get(id=event_id).name
@@ -154,8 +171,15 @@ def user_add(request):
 		email = request.POST.get('email')
 		phone = request.POST.get('phone')
 
-		temp = User.objects.create(name=name, email=email, phone=phone)
-		temp.save
+		
+		if len(phone) != 10:
+			# raise myException("Length of phone number is not 10")
+			return HttpResponse("Error throiw!!!!")
+		try:
+			temp = User.objects.create(name=name, email=email, phone=phone)
+			temp.save()
+		except:
+			pass
 		messages.add_message(request, messages.INFO, "Successfully Added User")
 		return redirect('show_users')
 	else:
@@ -176,6 +200,13 @@ def user_delete(request, user_id):
 	messages.add_message(request, messages.INFO, "Successfully Deleted User")
 	return redirect('show_users')
 
+def event_page(request, event_id):
+	event = Event.objects.get(id=event_id)
+
+	context = {
+		'event': event,
+	}
+	return render(request, 'core/event_details_page.html', context)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

@@ -11,7 +11,7 @@ class Event(models.Model):
 	organized_by = models.CharField(max_length=1000)
 	date = models.CharField(max_length=10)
 	time = models.CharField(max_length=10)
-	picture = models.ImageField()
+	picture = models.ImageField(blank=True, null=True)
 	location = models.TextField()
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateTimeField(auto_now=True)
@@ -22,7 +22,7 @@ class Event(models.Model):
 class User(models.Model):
 	name = models.CharField(max_length=1000)
 	email = models.EmailField()
-	phone = models.IntegerField(null=True, blank=True)
+	phone = models.CharField(max_length=100, null=True, blank=True)
 	created_date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):

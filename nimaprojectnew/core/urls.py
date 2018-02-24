@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout_user, name="logout"),
     url(r'^dashboard/$', views.dashboard, name="dashboard"),
     url(r'^create/$', views.create, name="create_event"),
+    url(r'^event/(?P<event_id>[0-9])/$', views.event_page, name="event_page"),
     url(r'^(?P<event_id>[0-9])/delete/$', views.delete_event, name="delete_event"),
     url(r'^(?P<event_id>[0-9])/update/$', views.update_event, name="update_event"),
     url(r'^(?P<event_id>[0-9])/send_email/$', views.send_email, name="send_email"),
