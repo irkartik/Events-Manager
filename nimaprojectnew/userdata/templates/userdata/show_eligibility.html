@@ -6,13 +6,6 @@
 	<div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Appointments</h3>
-			{% if messages %}
-			    <ul class="messages">
-			        {% for message in messages %}
-			            <p>{{ message }}</p>
-			        {% endfor %}
-			    </ul>
-			{% endif %}
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -28,7 +21,7 @@
                     <th>name</th>
                     <th>email</th>
                     <th>address</th>
-                    <th>phone</th>
+                    <th>phone</th><!--
                     <th>qualification</th>
                     <th>ielts</th>
                     <th>toefl</th>
@@ -37,7 +30,7 @@
                     <th>gmat</th>
                     <th>pte</th>
                     <th>priority_country</th>
-                    <th>remarks</th>
+                    <th>remarks</th> -->
                     <th>created_date</th>
                   </tr>
                   </thead>
@@ -49,7 +42,7 @@
           								<td>{{ data.email }}</td>
           								<td>{{ data.address }}</td>
           								<td>{{ data.phone }}</td>
-                          <td>{{ data.qualification }}</td>
+                         <!-- <td>{{ data.qualification }}</td>
                           <td>{{ data.ielts }}</td>
                           <td>{{ data.toefl }}</td>
                           <td>{{ data.sat }}</td>
@@ -58,8 +51,8 @@
                           <td>{{ data.pte }}</td>
                           <td>{{ data.priority_country }}</td>
                           <td>{{ data.remarks }}</td>  
-                          <td>{{ data.created_date }}</td>
-                          <!-- <td><a href="{% url 'user_delete' user.id %}">Delete</a></td> -->
+                           --><td>{{ data.created_date }}</td>
+                          <td><a href="{% url 'full_eligibility' data.id %}">See Full Detail</a></td> 
 								        </tr>
 	                  	{% endfor %}
 	                {% else %}

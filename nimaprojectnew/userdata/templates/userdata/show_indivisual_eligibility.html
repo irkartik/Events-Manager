@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Full Profile{% endblock %}
+
+{% block content %}
+	<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Full Profile</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <tbody>
+                    <tr>
+                        <th>name</th>
+                        <td>{{user.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>email</th>
+                        <td>{{user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>address</th>
+                        <td>{{user.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>phone</th>
+                        <td>{{user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>qualification</th>
+                        <td>{{user.qualification }}</td>
+                    </tr>
+                    <tr>
+                        <th>ielts</th>
+                        <td>{{user.ielts }}</td>
+                    </tr>
+                    <tr>
+                        <th>toefl</th>
+                        <td>{{user.toefl }}</td>
+                    </tr>
+                    <tr>
+                        <th>sat</th>
+                        <td>{{user.sat }}</td>
+                    </tr>
+                    <tr>
+                        <th>gre</th>
+                        <td>{{user.gre }}</td>
+                    </tr>
+                    <tr>
+                        <th>gmat</th>
+                        <td>{{user.gmat }}</td>
+                    </tr>
+                    <tr>
+                        <th>pte</th>
+                        <td>{{user.pte }}</td>
+                    </tr>
+                    <tr>
+                        <th>priority_country</th>
+                        <td>{{user.priority_country }}</td>
+                    </tr>
+                    <tr>
+                        <th>remarks</th>
+                        <td>{{user.remarks }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>created_date</th>
+                        <td>{{user.created_date }}</td>
+                    </tr>
+
+
+
+
+
+
+
+
+
+
+                     </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- <div class="box-footer clearfix">
+              <a href="{% url 'user_add' %}" class="btn btn-sm btn-info btn-flat pull-left">Add New User</a>
+            </div> -->
+            <!-- /.box-footer -->
+          </div>
+{% endblock %}

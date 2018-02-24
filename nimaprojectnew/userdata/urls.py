@@ -8,6 +8,7 @@ urlpatterns = [
 
 	url(r'^check-eligibility', views.create_check_eligibility, name="check-eligibility"),
 	url(r'^show_eligibility', views.show_eligibility, name="show_eligibility"),
+	url(r'^(?P<eligibility_id>[0-9])/full_eligibility', views.full_eligibility, name="full_eligibility"),	
 
 	url(r'^apply-now', views.apply_now, name="apply_now"),
 	url(r'^show_applied_users', views.show_applied_users, name="show_applied_users"),

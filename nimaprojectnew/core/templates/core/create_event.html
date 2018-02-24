@@ -12,23 +12,23 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Event Name" name="name">
+                  <input type="text" class="form-control" id="name" placeholder="Event Name" name="name" required="">
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea type="text" class="form-control" id="description" placeholder="Description" name="description"></textarea>
+                  <textarea type="text" class="form-control" id="description" placeholder="Description" name="description" required=""></textarea>
                 </div>
                 <div class="form-group">
                   <label for="price">Ticket Price</label>
-                  <input type="number" class="form-control" id="price" placeholder="Ticket Price" name="price">
+                  <input required="" type="number" class="form-control" id="price" placeholder="Ticket Price" name="price">
                 </div>
                 <div class="form-group">
                   <label for="organized_by">Organizer</label>
-                  <input type="text" class="form-control" id="organized_by" placeholder="Event Organizer" name="organizer">
+                  <input required="" type="text" class="form-control" id="organized_by" placeholder="Event Organizer" name="organizer">
                 </div>
                 <div class="form-group">
                   <label for="time">Time Of Event</label>
-                  <input type="text" class="form-control" id="time" placeholder="10:30 AM" name="time">
+                  <input required="" type="text" class="form-control" id="time" placeholder="10:30 AM" name="time">
                 </div>
                 <div class="form-group">
                 <label>Date of Event</label>
@@ -37,19 +37,19 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="date" class="form-control pull-right" id="datepicker" name ="date" placeholder="dd/mm/yyyy">
+                  <input required="" type="date" class="form-control pull-right" id="datepicker" name ="date" placeholder="dd/mm/yyyy">
                 </div>
                 <!-- /.input group -->
               </div>
              
               <div class="form-group">
                   <label for="location">Location</label>
-                  <textarea type="text" class="form-control" id="location" placeholder="Enter Location" name="location"></textarea>
+                  <textarea required="" type="text" class="form-control" id="location" placeholder="Enter Location" name="location"></textarea>
                 </div>
               <!-- /.box-body -->
                 <div class="form-group">
                   <label for="image">Upload Image</label>
-                  <input type="file" id="image" name="image">
+                  <input required="" type="file" id="image" name="image">
                 </div>
 
               <div class="box-footer">

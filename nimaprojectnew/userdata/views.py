@@ -120,7 +120,16 @@ def show_eligibility(request):
 
 	return render(request, 'userdata/show_eligibility.html', context)
 
+@login_required(login_url='/login')
+def full_eligibility(request, eligibility_id):
+	user = Eligibility.objects.get(id=eligibility_id)
 
+	context = {
+		'user': user,
+	}
+	return render(request, 'userdata/show_indivisual_eligibility.html', context)
+
+@login_required(login_url="/login")
 def show_applied_users(request):
 	users = AppliedUser.objects.all().order_by('-created_date')
 	print(users)
@@ -130,6 +139,7 @@ def show_applied_users(request):
 
 	return render(request, 'userdata/show_applied_users.html', context)
 
+@login_required(login_url="/login")
 def show_full_profile(request, user_id):
 	user = AppliedUser.objects.get(id=user_id)
 	context = {
@@ -255,6 +265,7 @@ def apply_now(request):
 	else:
 		return render(request, 'userdata/apply_now.html')
 
+@login_required(login_url="/login")
 def full_appointment(request, appointment_id):
 	temp = Appointment.objects.get(id=appointment_id)
 	context = {
