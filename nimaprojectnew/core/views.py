@@ -20,6 +20,7 @@ from .serializers import UserSerializer, EventSerializer
 from django.utils.datastructures import MultiValueDictKeyError
 from exceptions import MasterException
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -74,18 +75,16 @@ def create(request):
 			image = request.FILES["image"]
 		except MultiValueDictKeyError:
 			return HttpResponse(json.dumps({'error': "exception occurred"}))
-		try:
-			temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
-			barcode_file_name = 'barcode_event_' + str(temp.id)
-			unique_code = random.randint(9000000,100000000)
-			barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
-			barcode = barcode.replace('media/', "")
-			temp.barcode = barcode
-			temp.unique_code = unique_code
-			temp.save()
-		except Exception as e:
-			MasterException(e)
 
+		temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
+		barcode_file_name = 'barcode_event_' + str(temp.id)
+		unique_code = random.randint(9000000,100000000)
+		barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
+		barcode = barcode.replace('media/', "")
+		temp.barcode = barcode
+		temp.unique_code = unique_code
+		temp.save()
+		
 		return redirect('dashboard')
 	else:
 		context = {}
@@ -174,7 +173,7 @@ def user_add(request):
 		
 		if len(phone) != 10:
 			# raise myException("Length of phone number is not 10")
-			return HttpResponse("Error throiw!!!!")
+			return HttpResponse("Error throw!!!!")
 		try:
 			temp = User.objects.create(name=name, email=email, phone=phone)
 			temp.save()
@@ -222,3 +221,54 @@ class EventViewSet(viewsets.ModelViewSet):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+@csrf_exempt
+def events_api(request):
+	if request.method == "POST":
+		name = request.POST.get("name",'fgfg')
+		description = request.POST.get("description") 
+		price = request.POST.get("price")
+		organized_by = request.POST.get("organized_by")
+		date = request.POST.get("date")
+		time = request.POST.get("time")
+		location = request.POST.get("location")
+		print(location)
+		try:
+			image = request.FILES["image"]
+		except MultiValueDictKeyError:
+			return HttpResponse(json.dumps({'error': "exception occurred"}))
+
+		temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
+		barcode_file_name = 'barcode_event_' + str(temp.id)
+		unique_code = random.randint(9000000,100000000)
+		barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
+		barcode = barcode.replace('media/', "")
+		temp.barcode = barcode
+		temp.unique_code = unique_code
+		temp.save()
+		print(temp)
+		
+		return HttpResponse('created event')
+	else:
+		temp = Event.objects.all()
+		print(temp)
+		results = []
+		for event in temp:
+			event_json = {}
+			event_json['id'] = event.id
+			event_json['name'] = event.name
+			event_json['unique_code'] = event.unique_code
+			event_json['barcode'] = event.barcode.url
+			event_json['description'] = event.description
+			event_json['price'] = event.price
+			event_json['organized_by'] = event.organized_by
+			event_json['date'] = event.date
+			event_json['time'] = event.time
+			event_json['picture'] = event.picture.url
+			event_json['location'] = event.location
+			event_json['created_on'] = str(event.created_on)
+			event_json['updated_on'] = str(event.updated_on)
+			results.append(event_json)
+		data = json.dumps(results)
+		mimetype = 'application/json'
+		return HttpResponse(data, mimetype)

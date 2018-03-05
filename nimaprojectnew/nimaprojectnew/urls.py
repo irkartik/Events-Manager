@@ -21,12 +21,13 @@ from core import views as coreviews
 from userdata import views as userdataviews
 from . import settings
 from django.conf.urls.static import static
+from core import views as core_views
 
 
 
 router = routers.DefaultRouter()
 router.register(r'api/users', coreviews.UserViewSet)
-router.register(r'api/events', coreviews.EventViewSet)
+#router.register(r'api/events', coreviews.EventViewSet)
 router.register(r'api/appointments', userdataviews.AppointmentViewSet)
 router.register(r'api/eligibility', userdataviews.EligibilityViewSet)
 router.register(r'api/appliedusers', userdataviews.AppliedUserViewSet)
@@ -41,6 +42,7 @@ urlpatterns = [
 	url(r'^api/appointments/(?P<appointment_id>[0-9])', userdataviews.AppointmentIndivisual.as_view()),
 	url(r'^api/appliedusers/(?P<applieduser_id>[0-9])', userdataviews.AppliedUserIndivisual.as_view()),
 	url(r'^api/eligibility/(?P<eligibility_id>[0-9])', userdataviews.EligibilityIndivisual.as_view()),
+	url(r'^api/events', core_views.events_api, name="events_api"),
 ]
 
 if settings.DEBUG:

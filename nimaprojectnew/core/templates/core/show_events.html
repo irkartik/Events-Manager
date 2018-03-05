@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Events | Nima {% endblock %}
+{% block title %}Events | Nimas {% endblock %}
 
 {% load static %}
 
@@ -42,7 +42,7 @@
                                   <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                   
                                   <button type="button" class="btn bg-black btn-lg"><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Attend the event {{ event.name }} organized by {{event.organizer}} on {{event.date}}, {{event.time}} at {{event.location}}&amp;url={{BASE_URL}}/event/{{event.id}}"><i class="fa fa-twitter"></i></a></button> 
-                                  <div class="fb-share-button" data-href="http://localhost:8000/event/1" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{BASE_URL}}/event/{{event.id}}&amp;src=sdkpreparse"><button type="button" class="btn bg-black btn-lg"><i class="fa fa-facebook"></i></button></a></div>
+                                  <div class="fb-share-button" data-href="http://localhost:8000/event/1" data-layout="button" data-size="large" data-mobile-iframe="true" style="display:inline;"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{BASE_URL}}/event/{{event.id}}&amp;src=sdkpreparse"><button type="button" class="btn bg-black btn-lg"><i class="fa fa-facebook"></i></button></a></div>
                                   <!-- <button type="button" class="btn bg-black btn-lg"><i class="fa fa-google-plus"></i></button> -->
                                 </div>
                               </div>
