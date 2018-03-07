@@ -1,10 +1,13 @@
 {% extends 'core/base.html' %}
 
+
+{% block title %}Update Event{% endblock %}
+
 {% load static %}
 {% block content %}
 	<div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Create An Event</h3>
+              <h3 class="box-title">Update Event for {{event.name}}</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

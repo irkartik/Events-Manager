@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User as authUser
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
@@ -92,7 +92,7 @@ def create(request):
 
 @login_required(login_url="/login/")
 def delete_event(request, event_id):
-	temp = Event.objects.get(id=event_id)
+	temp = get_object_or_404(Event, id=event_id)
 	temp.delete()
 
 	return redirect('dashboard')
@@ -100,7 +100,7 @@ def delete_event(request, event_id):
 @login_required(login_url="/login/")
 def update_event(request, event_id):
 	if request.method=="POST":
-		temp = Event.objects.get(id=event_id)
+		temp = get_object_or_404(Event, id=event_id)
 		
 		try:
 			name = request.POST.get("name")
@@ -131,7 +131,7 @@ def update_event(request, event_id):
 		return redirect('dashboard')
 	else:
 		context = {
-			'event': Event.objects.get(id=event_id),
+			'event': get_object_or_404(Event, id=event_id),
 			'datetime': datetime.now().date,
 		}
 		return render(request, 'core/event_update.html', context)
@@ -140,12 +140,12 @@ def update_event(request, event_id):
 def send_email(request, event_id):
 
 	context = {
-		'event': Event.objects.get(id=event_id),
+		'event': get_object_or_404(Event, id=event_id),
 		'datetime': datetime.now().date,
 		'BASE_URL': BASE_URL
 	}
 
-	subject = "Invitation for " + Event.objects.get(id=event_id).name
+	subject = "Invitation for " + get_object_or_404(Event, id=event_id).name
 	to = list()
 	for user in User.objects.all():
 		to.append(user.email)
@@ -170,10 +170,6 @@ def user_add(request):
 		email = request.POST.get('email')
 		phone = request.POST.get('phone')
 
-		
-		if len(phone) != 10:
-			# raise myException("Length of phone number is not 10")
-			return HttpResponse("Error throw!!!!")
 		try:
 			temp = User.objects.create(name=name, email=email, phone=phone)
 			temp.save()
@@ -194,13 +190,13 @@ def show_users(request):
 
 @login_required(login_url="/login/")
 def user_delete(request, user_id):
-	temp = User.objects.get(id=user_id)
+	temp = get_object_or_404(User, id=user_id)
 	temp.delete()
 	messages.add_message(request, messages.INFO, "Successfully Deleted User")
 	return redirect('show_users')
 
 def event_page(request, event_id):
-	event = Event.objects.get(id=event_id)
+	event = get_object_or_404(Event, id=event_id)
 
 	context = {
 		'event': event,
@@ -222,53 +218,53 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-@csrf_exempt
-def events_api(request):
-	if request.method == "POST":
-		name = request.POST.get("name",'fgfg')
-		description = request.POST.get("description") 
-		price = request.POST.get("price")
-		organized_by = request.POST.get("organized_by")
-		date = request.POST.get("date")
-		time = request.POST.get("time")
-		location = request.POST.get("location")
-		print(location)
-		try:
-			image = request.FILES["image"]
-		except MultiValueDictKeyError:
-			return HttpResponse(json.dumps({'error': "exception occurred"}))
+# @csrf_exempt
+# def events_api(request):
+# 	if request.method == "POST":
+# 		name = request.POST.get("name",'fgfg')
+# 		description = request.POST.get("description") 
+# 		price = request.POST.get("price")
+# 		organized_by = request.POST.get("organized_by")
+# 		date = request.POST.get("date")
+# 		time = request.POST.get("time")
+# 		location = request.POST.get("location")
+# 		print(location)
+# 		try:
+# 			image = request.FILES["image"]
+# 		except MultiValueDictKeyError:
+# 			return HttpResponse(json.dumps({'error': "exception occurred"}))
 
-		temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
-		barcode_file_name = 'barcode_event_' + str(temp.id)
-		unique_code = random.randint(9000000,100000000)
-		barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
-		barcode = barcode.replace('media/', "")
-		temp.barcode = barcode
-		temp.unique_code = unique_code
-		temp.save()
-		print(temp)
+# 		temp = Event.objects.create(name=name, description=description, price=price, organized_by=organized_by, date=date, time=time, picture=image, location=location)
+# 		barcode_file_name = 'barcode_event_' + str(temp.id)
+# 		unique_code = random.randint(9000000,100000000)
+# 		barcode = mybarcode.MyBarcodeDrawing(unique_code).save(formats=['gif'],outDir='media/barcodes',fnRoot=barcode_file_name)
+# 		barcode = barcode.replace('media/', "")
+# 		temp.barcode = barcode
+# 		temp.unique_code = unique_code
+# 		temp.save()
+# 		print(temp)
 		
-		return HttpResponse('created event')
-	else:
-		temp = Event.objects.all()
-		print(temp)
-		results = []
-		for event in temp:
-			event_json = {}
-			event_json['id'] = event.id
-			event_json['name'] = event.name
-			event_json['unique_code'] = event.unique_code
-			event_json['barcode'] = event.barcode.url
-			event_json['description'] = event.description
-			event_json['price'] = event.price
-			event_json['organized_by'] = event.organized_by
-			event_json['date'] = event.date
-			event_json['time'] = event.time
-			event_json['picture'] = event.picture.url
-			event_json['location'] = event.location
-			event_json['created_on'] = str(event.created_on)
-			event_json['updated_on'] = str(event.updated_on)
-			results.append(event_json)
-		data = json.dumps(results)
-		mimetype = 'application/json'
-		return HttpResponse(data, mimetype)
+# 		return HttpResponse('created event')
+# 	else:
+# 		temp = Event.objects.all()
+# 		print(temp)
+# 		results = []
+# 		for event in temp:
+# 			event_json = {}
+# 			event_json['id'] = event.id
+# 			event_json['name'] = event.name
+# 			event_json['unique_code'] = event.unique_code
+# 			event_json['barcode'] = event.barcode.url
+# 			event_json['description'] = event.description
+# 			event_json['price'] = event.price
+# 			event_json['organized_by'] = event.organized_by
+# 			event_json['date'] = event.date
+# 			event_json['time'] = event.time
+# 			event_json['picture'] = event.picture.url
+# 			event_json['location'] = event.location
+# 			event_json['created_on'] = str(event.created_on)
+# 			event_json['updated_on'] = str(event.updated_on)
+# 			results.append(event_json)
+# 		data = json.dumps(results)
+# 		mimetype = 'application/json'
+# 		return HttpResponse(data, mimetype)
