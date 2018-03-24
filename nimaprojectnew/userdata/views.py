@@ -13,8 +13,20 @@ class AppointmentViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Appointments to be viewed or edited.
     """
-    queryset = Appointment.objects.all().order_by('-created_date')
     serializer_class = AppointmentSerializer
+    
+    def get_queryset(self):
+		"""
+		Optionally restricts the returned purchases to a given user,
+		by filtering against a `username` query parameter in the URL.
+		"""
+		branch = self.request.query_params.get('branch')
+		if branch is not None:
+		    queryset = Appointment.objects.all().filter(branch__id=branch).order_by('-created_date')
+		else:
+			queryset = Appointment.objects.all().order_by('-created_date')
+		return queryset
+
 
 class EligibilityViewSet(viewsets.ModelViewSet):
     """
@@ -23,12 +35,36 @@ class EligibilityViewSet(viewsets.ModelViewSet):
     queryset = Eligibility.objects.all().order_by('-created_date')
     serializer_class = EligibilitySerializer
 
+    def get_queryset(self):
+		"""
+		Optionally restricts the returned purchases to a given user,
+		by filtering against a `username` query parameter in the URL.
+		"""
+		branch = self.request.query_params.get('branch')
+		if branch is not None:
+		    queryset = Eligibility.objects.all().filter(branch__id=branch).order_by('-created_date')
+		else:
+			queryset = Eligibility.objects.all().order_by('-created_date')
+		return queryset
+
 class AppliedUserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Eligibility form data to be viewed or edited.
     """
-    queryset = AppliedUser.objects.all().order_by('-created_date')
     serializer_class = AppliedUserSerializer
+
+    def get_queryset(self):
+		"""
+		Optionally restricts the returned purchases to a given user,
+		by filtering against a `username` query parameter in the URL.
+		"""
+		branch = self.request.query_params.get('branch')
+		if branch is not None:
+		    queryset = AppliedUser.objects.all().filter(branch__id=branch).order_by('-created_date')
+		else:
+			queryset = AppliedUser.objects.all().order_by('-created_date')
+		return queryset
+
 
 # class AppointmentIndivisual(generics.ListAPIView):
 # 	serializer_class = AppointmentSerializer

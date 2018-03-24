@@ -209,20 +209,48 @@ def event_page(request, event_id):
 	return render(request, 'core/event_details_page.html', context)
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
+	"""
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+	# queryset = User.objects.all()
+	# branch = self.request.query_params.get('branch', None)
+	# if branch is not None:
+	# 	queryset = queryset.filter(branch__id=branch)
+
+	serializer_class = UserSerializer
+
+	def get_queryset(self):
+		"""
+		Optionally restricts the returned purchases to a given user,
+		by filtering against a `username` query parameter in the URL.
+		"""
+		branch = self.request.query_params.get('branch')
+		if branch is not None:
+		    queryset = User.objects.all().filter(branch__id=branch)
+		else:
+			queryset = User.objects.all()
+		return queryset
 
 
 class EventViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows events to be viewed or edited.
     """
-    queryset = Event.objects.all()
     serializer_class = EventSerializer
 
+    def get_queryset(self):
+		"""
+		Optionally restricts the returned purchases to a given user,
+		by filtering against a `username` query parameter in the URL.
+		"""
+		branch = self.request.query_params.get('branch')
+		if branch is not None:
+		    queryset = Event.objects.all().filter(branch__id=branch)
+		else:
+			queryset = Event.objects.all()
+		return queryset
+
+    
 class BranchViewSet(viewsets.ModelViewSet):
 	queryset = Branch.objects.all()
 	serializer_class = BranchSerializer

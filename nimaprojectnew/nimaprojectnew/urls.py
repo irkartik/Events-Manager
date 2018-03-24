@@ -26,12 +26,12 @@ from core import views as core_views
 
 
 router = routers.DefaultRouter()
-router.register(r'api/users', coreviews.UserViewSet)
+router.register(r'api/users', coreviews.UserViewSet, base_name= 'user')
 router.register(r'api/branches', coreviews.BranchViewSet)
-router.register(r'api/events', coreviews.EventViewSet)
-router.register(r'api/appointments', userdataviews.AppointmentViewSet)
-router.register(r'api/eligibility', userdataviews.EligibilityViewSet)
-router.register(r'api/appliedusers', userdataviews.AppliedUserViewSet)
+router.register(r'api/events', coreviews.EventViewSet, base_name = 'event')
+router.register(r'api/appointments', userdataviews.AppointmentViewSet, base_name = 'appointment')
+router.register(r'api/eligibility', userdataviews.EligibilityViewSet, base_name='eligibility')
+router.register(r'api/appliedusers', userdataviews.AppliedUserViewSet, base_name = 'applieduser')
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
