@@ -124,6 +124,8 @@ EMAIL_HOST_USER = 'admin@gmail.com'
 EMAIL_HOST_PASSWORD = '#'
 EMAIL_PORT = 587
 
+AUTH_USER_MODEL = 'core.AuthUser'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
