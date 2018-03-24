@@ -1,9 +1,11 @@
 from django.db import models
+from core.models import Branch
 
 # Create your models here.
 
 class Eligibility(models.Model):
 	name = models.CharField(max_length=1000)
+	branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
 	email = models.EmailField()
 	address = models.TextField()
 	phone = models.CharField(max_length=1000)
@@ -23,6 +25,7 @@ class Eligibility(models.Model):
 
 class Appointment(models.Model):
 	full_name = models.CharField(max_length=1000)
+	branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
 	address = models.TextField()
 	telephone_no = models.CharField(max_length=100)
 	mobile_no = models.CharField(max_length=100)
@@ -40,6 +43,7 @@ class Appointment(models.Model):
 		return self.full_name
 
 class AppliedUser(models.Model):
+	branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
 	created_date = models.DateTimeField(auto_now_add=True)
 	year = models.CharField(max_length=4, blank=True, null=True)
 	intake = models.CharField(max_length=50,blank=True, null=True)

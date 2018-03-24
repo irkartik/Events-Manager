@@ -27,6 +27,7 @@ from core import views as core_views
 
 router = routers.DefaultRouter()
 router.register(r'api/users', coreviews.UserViewSet)
+router.register(r'api/branches', coreviews.BranchViewSet)
 router.register(r'api/events', coreviews.EventViewSet)
 router.register(r'api/appointments', userdataviews.AppointmentViewSet)
 router.register(r'api/eligibility', userdataviews.EligibilityViewSet)

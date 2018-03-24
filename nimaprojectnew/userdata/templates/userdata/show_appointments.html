@@ -43,7 +43,7 @@
                           <td>{{ data.purpose_of_visit }}</td>
                           <td>{{ data.date }}</td>
                           <td>{{ data.time }}</td>
-                          <td><a href="{% url 'full_appointment' user.id %}">See Full Detail</a></td>
+                          <td><a href="{% url 'full_appointment' data.id %}">See Full Detail</a></td>
 								        </tr>
 	                  	{% endfor %}
 	                {% else %}

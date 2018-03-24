@@ -53,7 +53,7 @@ class AppliedUserViewSet(viewsets.ModelViewSet):
 
 @login_required(login_url="/login")
 def show_appointments(request):
-	users = Appointment.objects.all().order_by('-created_date')
+	users = Appointment.objects.all().filter(branch=request.user.branch).order_by('-created_date')
 	print(users)
 	context = {
 		'appointments' : users,
@@ -112,7 +112,7 @@ def create_check_eligibility(request):
 
 @login_required(login_url="/login")
 def show_eligibility(request):
-	users = Eligibility.objects.all().order_by('-created_date')
+	users = Eligibility.objects.all().filter(branch=request.user.branch).order_by('-created_date')
 	print(users)
 	context = {
 		'eligibilities' : users,
@@ -131,7 +131,7 @@ def full_eligibility(request, eligibility_id):
 
 @login_required(login_url="/login")
 def show_applied_users(request):
-	users = AppliedUser.objects.all().order_by('-created_date')
+	users = AppliedUser.objects.all().filter(branch=request.user.branch).order_by('-created_date')
 	print(users)
 	context = {
 		'appliedusers' : users,

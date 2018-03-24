@@ -3,7 +3,7 @@ from .models import Event, User, AuthUser, Branch
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-class CustomUserAdmin(UserAdmin):
+class StaffUserAdmin(UserAdmin):
 # ...code here...
 
     fieldsets = (
@@ -22,7 +22,14 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = ('username', 'first_name', 'email', 'branch', 'is_staff')
 
-admin.site.register(AuthUser, CustomUserAdmin)
-admin.site.register(Event)
+    list_filter = ('branch', 'is_staff',)
+
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name', 'branch', 'time', 'date', 'location', )
+
+    list_filter = ('branch',)
+
+admin.site.register(AuthUser, StaffUserAdmin)
+admin.site.register(Event, EventAdmin)
 admin.site.register(User)
 admin.site.register(Branch)

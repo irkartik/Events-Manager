@@ -1,24 +1,29 @@
-from .models import User, Event
+from .models import User, Event, Branch, AuthUser
 from rest_framework import serializers
 from . import mybarcode
 import random
 
+class BranchSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Branch
+        fields = ('id', 'url', 'name', 'address', )
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'url', 'email', 'phone', 'created_date')
+        fields = ('id', 'branch', 'url', 'email', 'phone', 'created_date')
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
-        fields = ('id','url', 'name', 'description', 'price', 'organized_by', 'date', 'time', 'picture', 'location', 'created_on', 'updated_on')
+        fields = ('id','url', 'branch', 'name', 'description', 'price', 'organized_by', 'date', 'time', 'picture', 'location', 'created_on', 'updated_on')
 
     def create(self, validated_data):
     	event = Event(
             name = validated_data['name'],
             description = validated_data['description'],
+            branch = validated_data['branch'],
             price = validated_data['price'],
             organized_by = validated_data['organized_by'],
             date = validated_data['date'],
@@ -39,17 +44,4 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 
         return event
 
-    # def update(self, instance, validated_data):
-    #     instance.name = validated_data['name'],
-    #     instance.description = validated_data['description'],
-    #     instance.price = validated_data['price'],
-    #     instance.organized_by = validated_data['organized_by'],
-    #     instance.date = validated_data['date'],
-    #     instance.time = validated_data['time'],
-    #     instance.location = validated_data['location'],
-    #     instance.picture = validated_data['picture']
-
-    #     instance.save()
-
-    #     return instance
 
